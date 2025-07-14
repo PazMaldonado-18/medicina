@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Curricular Medicina UNLP</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+    .anio {
+      margin: 2rem 0;
+    }
+    .anio h2 {
+      background-color: #007bff;
+      color: white;
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+    .materias {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .materia {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .materia:hover {
+      background: #eef;
+    }
+    .completada {
+      background-color: #c8e6c9;
+      border-color: #66bb6a;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <h1>Malla Curricular Medicina UNLP</h1>
+
+  <div class="anio">
+    <h2>1° Año</h2>
+    <div class="materias">
+      <div class="materia">Anatomía</div>
+      <div class="materia">Biología</div>
+      <div class="materia">Citología, Histología y Embriología</div>
+      <div class="materia">Ciencias Sociales y Medicina</div>
+      <div class="materia">Informática Básica</div>
+    </div>
+  </div>
+
+  <div class="anio">
+    <h2>2° Año</h2>
+    <div class="materias">
+      <div class="materia">Fisiología y Física Biológica</div>
+      <div class="materia">Bioquímica y Biología Molecular</div>
+      <div class="materia">Epidemiología</div>
+      <div class="materia">Psicología Médica</div>
+    </div>
+  </div>
+
+  <div class="anio">
+    <h2>3° Año</h2>
+    <div class="materias">
+      <div class="materia">Farmacología Básica</div>
+      <div class="materia">Microbiología y Parasitología</div>
+      <div class="materia">Patología</div>
+      <div class="materia">Semiología</div>
+      <div class="materia">Oftalmología</div>
+      <div class="materia">Salud y Medicina Comunitaria</div>
+      <div class="materia">Informática Médica</div>
+    </div>
+  </div>
+
+  <div class="anio">
+    <h2>4° Año</h2>
+    <div class="materias">
+      <div class="materia">Cirugía I</div>
+      <div class="materia">Farmacología Aplicada</div>
+      <div class="materia">Infectología</div>
+      <div class="materia">Medicina Interna I</div>
+      <div class="materia">Dermatología</div>
+      <div class="materia">Diagnóstico por Imágenes I</div>
+      <div class="materia">Neurología</div>
+      <div class="materia">Ortopedia y Traumatología</div>
+      <div class="materia">Otorrinolaringología</div>
+      <div class="materia">Psiquiatría Módulo 1</div>
+      <div class="materia">Salud Pública Módulo 1</div>
+      <div class="materia">Urología</div>
+    </div>
+  </div>
+
+  <div class="anio">
+    <h2>5° Año</h2>
+    <div class="materias">
+      <div class="materia">Cirugía II</div>
+      <div class="materia">Deontología y Medicina Legal</div>
+      <div class="materia">Diagnóstico por Imágenes II</div>
+      <div class="materia">Ginecología</div>
+      <div class="materia">Medicina Interna II</div>
+      <div class="materia">Obstetricia</div>
+      <div class="materia">Pediatría</div>
+      <div class="materia">Psiquiatría Módulo 2</div>
+      <div class="materia">Salud Pública Módulo 2</div>
+      <div class="materia">Toxicología</div>
+      <div class="materia">Terapia Intensiva</div>
+    </div>
+  </div>
+
+  <div class="anio">
+    <h2>6° Año</h2>
+    <div class="materias">
+      <div class="materia">Práctica Final Obligatoria</div>
+    </div>
+  </div>
+
+  <script>
+    const materias = document.querySelectorAll('.materia');
+    materias.forEach(m => {
+      m.addEventListener('click', () => {
+        m.classList.toggle('completada');
+        guardarEstado();
+      });
+    });
+
+    function guardarEstado() {
+      const estado = [];
+      materias.forEach(m => {
+        estado.push(m.classList.contains('completada'));
+      });
+      localStorage.setItem('estadoMateriasMedicina', JSON.stringify(estado));
+    }
+
+    function cargarEstado() {
+      const estadoGuardado = JSON.parse(localStorage.getItem('estadoMateriasMedicina'));
+      if (estadoGuardado) {
+        materias.forEach((m, i) => {
+          if (estadoGuardado[i]) m.classList.add('completada');
+        });
+      }
+    }
+
+    cargarEstado();
+  </script>
+</body>
+</html>
